@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Editor</title>
+</head>
+<body>
+    <h1>Editor</h1>
+
+    <form method="POST" action="/editor" enctype="multipart/form-data">
+		<label for="post_data">Post:</label>
+		<textarea name="post_data" id="post_data" cols="70" rows="30"></textarea>
+		<br><br>
+		<label for="image">Image:</label>
+		<input type="file" name="image" id="image">
+		<br><br>
+		<div id="image_fields"></div>
+		<button type="button" onclick="addImageField()">Add Image</button>
+		<br><br>
+		<input type="submit" value="Save Post">
+	</form>
+
+    <script>
+        var form = document.getElementsByTagName("form")[0];
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/editor");
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert("Post added successfully!!");
+                    form.reset();
+                }else if(xhr.status === 403){
+                    alert("Can not submit an empty post. ");
+                } 
+                else {
+                    alert("An error occurred while adding the post.");
+                }
+            };
+            xhr.send(new FormData(form));
+        });
+
+        function addImageField() {
+			var imageFieldsDiv = document.getElementById("image_fields");
+			var input = document.createElement("input");
+			input.type = "file";
+			input.name = "image";
+			input.multiple = true;
+			imageFieldsDiv.appendChild(input);
+			imageFieldsDiv.appendChild(document.createElement("br"));
+		}
+    </script>
+</body>
+</html>
