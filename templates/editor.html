@@ -7,15 +7,21 @@
     <h1>Editor</h1>
 
     <form method="POST" action="/editor" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <textarea id="title" name="title" cols="70" rows="2"></textarea>
+        <br>
 		<label for="post_data">Post:</label>
 		<textarea name="post_data" id="post_data" cols="70" rows="30"></textarea>
 		<br><br>
-		<label for="image">Image:</label>
-		<input type="file" name="image" id="image">
-		<br><br>
 		<div id="image_fields"></div>
 		<button type="button" onclick="addImageField()">Add Image</button>
-		<br><br>
+        <br><br>
+        <label for="mainpost">Main Title Post:</label>
+        <input type="checkbox" name="mainpost" id="mainpost">
+        <br><br>
+        <label for="featuredpost">Featured Post:</label>
+        <input type="checkbox" name="featuredpost" id="featuredpost">
+        <br><br>
 		<input type="submit" value="Save Post">
 	</form>
 
